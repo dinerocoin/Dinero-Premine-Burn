@@ -22,7 +22,7 @@ For instructions, call the program with no arguments::
                   the first two are coin specific
 
 
-An example template is accessible using "test" as the arguemnt::
+An example template is accessible using "test" as the argument::
 
     % burn-btc test
     1BurnBTCForFunBurnBTCForFunXTmJXrC
