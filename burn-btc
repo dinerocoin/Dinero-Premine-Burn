@@ -38,6 +38,14 @@ from hashlib import sha256
 
 from base58 import b58encode, b58decode
 
+ABET = "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz"
+
+class BurnBTCError(Exception):
+  pass
+
+class AlphabetError(BurnBTCError):
+  pass
+
 def hh256(s):
   s = sha256(s).digest()
   return binascii.hexlify(sha256(s).digest())
@@ -72,4 +80,12 @@ if __name__ == "__main__":
     template = "1BurnBTCForFunBurnBTCForFunXXXXXXX"
   else:
     template = sys.argv[1]
+  for c in template:
+    if c not in ABET:
+      raise AlphabetError("Character '%s' is not valid base58." % c)
+    tlen = len(template)
+    if tlen < 34:
+      template = template + ((34 - tlen) * "X")
+    else:
+      template = template[:34]
   print burn(template)
